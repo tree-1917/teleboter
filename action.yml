@@ -1,0 +1,31 @@
+name: "Telebot Sender"
+description: "Send Telegram messages/files to users from users.csv"
+author: "tree-1917"
+
+# branding 
+branding: 
+  icon: "send" 
+  color: "blue" 
+
+# inputs 
+inputs:
+  api_token:
+    description: "Telegram Bot API Token"
+    required: true
+  message:
+    description: "Message text to send"
+    required: true
+  file:
+    description: "Optional file path to send"
+    required: false
+  caption: 
+    description: "Optional caption for send" 
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run Telegram Sender
+      shell: bash
+      run: $GITHUB_ACTION_PATH/send.sh "${{ inputs.api_token }}" "${{ inputs.message }}" "${{ inputs.file }}" "${{ inputs.caption }}"
+
